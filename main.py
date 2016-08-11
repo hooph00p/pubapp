@@ -21,6 +21,12 @@ class Reader(object):
     pass
 
 
+class Counter(object):
+
+    def __init__(self):
+        self.count = 0
+
+
 class Employee(object):
     """
     Holds Employee first name, last name & picks.
@@ -43,10 +49,15 @@ class Employee(object):
             return True
 
     def validate_pick(self, _pick):
-        return str(_pick) not in self.__picks and isinstance(_pick, int)
+        return str(_pick) not in self.__picks \
+            and isinstance(_pick, int) \
+            and _pick >= 1 and _pick <= 69
+
+    def validate_powerball(self, _pb):
+        return isinstance(_pb, int)
 
     def pick_powerball(self, _pb):
-        if isinstance(_pb, int):
+        if self.validate_powerball(_pb):
             self.__pball = str(_pb)
 
     def __str__(self):
