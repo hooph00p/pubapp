@@ -37,10 +37,13 @@ class Employee(object):
 
     def add_pick(self, _pick):
         # returns True on success
-        if str(_pick) not in self.__picks and isinstance(_pick, int):
+        if self.validate_pick(_pick):
             self.__picks.append(str(_pick))
             self.__picks.sort()
             return True
+
+    def validate_pick(self, _pick):
+        return str(_pick) not in self.__picks and isinstance(_pick, int)
 
     def pick_powerball(self, _pb):
         if isinstance(_pb, int):
