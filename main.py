@@ -4,21 +4,26 @@ import argparse
 class Application(object):
 
     def __init__(self):
-        self.reader = Reader()
-        employee = Employee()
-        employee.set_first_name('Jared')
-        employee.set_last_name('Hooper')
-        employee.add_pick(1)
-        employee.add_pick(2)
-        employee.add_pick(3)
-        employee.add_pick(4)
-        employee.add_pick(5)
-        employee.pick_powerball(5)
-        print(employee)
+        pass
 
+    def prompt_done(self):
+        pass
 
-class Reader(object):
-    pass
+    def decide_winner(self):
+        pass
+
+    def update_winning_numbers(self):
+        pass
+
+    def prompt_picks(self, position):
+        pass
+
+    def run(self):
+        while(self.position < 6):
+            if success:
+                self.position += 1
+        if self.prompt_done():
+            self.end()
 
 
 class Counter(object):
@@ -51,10 +56,13 @@ class Employee(object):
     def validate_pick(self, _pick):
         return str(_pick) not in self.__picks \
             and isinstance(_pick, int) \
+            and len(self.__picks) < 5 \
             and _pick >= 1 and _pick <= 69
 
     def validate_powerball(self, _pb):
-        return isinstance(_pb, int)
+        return isinstance(_pb, int) \
+            and _pb >= 1 and _pb <= 26 \
+            and not self.hasattr(self.__powerball)
 
     def pick_powerball(self, _pb):
         if self.validate_powerball(_pb):
@@ -62,6 +70,18 @@ class Employee(object):
 
     def __str__(self):
         return " ".join([self.__fname, self.__lname] + self.__picks + ['Powerball:', self.__pball])
+
+
+class Test(object):
+
+    def __init__(self):
+        pass
+
+    def success_1(self):
+        pass
+
+    def fail_case_1(self):
+        pass
 
 if __name__ == '__main__':
     application = Application()
