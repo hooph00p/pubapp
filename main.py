@@ -14,12 +14,11 @@ class Application(object):
         self.employees = []
         self.winning_numbers = Counter()
         self.powerball = Counter()
-        pass
 
     def run(self):
         position = 0
         NUMBER_START = 3  # after fname lname
-        employee = Employee()  # first employee
+        employee = Ticket()  # first employee
         while(position < NUMBER_START + 6):
 
             if position == 0:  # first name
@@ -74,7 +73,7 @@ class Application(object):
         """
 
         print('-' * 20)
-        print('Employees:')
+        print('Tickets:')
         for employee in self.employees:
             print(employee)
 
@@ -112,9 +111,9 @@ class Application(object):
         print(powerball_winner)
 
 
-class Employee(object):
+class Ticket(object):
     """
-    Holds Employee first name, last name & picks.
+    Holds Employee first name, last name & lottery ticket info.
     """
 
     def __init__(self):
@@ -167,7 +166,9 @@ class Employee(object):
             print(e)
 
     def __str__(self):
-        return " ".join([self.__fname, self.__lname] + list(map(str, self.__picks)) + ['Powerball:', str(self.__powerball)])
+        return " ".join([self.__fname, self.__lname] +
+                        list(map(str, self.__picks)) +
+                        ['Powerball:', str(self.__powerball)])
 
 if __name__ == '__main__':
     application = Application()
