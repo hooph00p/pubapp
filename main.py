@@ -9,35 +9,39 @@ TOP_RANGE_POWERBALL = 26
 
 
 class Application(object):
+    """
+    Main applicatino class
+    """
 
     def __init__(self):
         self.employees = []
         self.winning_numbers = Counter()
         self.powerball = Counter()
-        pass
 
     def run(self):
+        """
+        Main application method
+        """
         position = 0
-        NUMBER_START = 3  # after fname lname
-        employee = Employee()  # first employee
-        while(position < NUMBER_START + 6):
+        NUMBER_START = 3  # after fname lname ( 1 , 2 )
+        employee = Employee()
+        while(position < NUMBER_START + 5):
 
-            if position == 0:  # first name
+            if position == 0:
                 first_name = input('First Name: ')
                 success = employee.set_first_name(first_name)
 
-            elif position == 1:  # last name
+            elif position == 1:
                 last_name = input('Last Name: ')
                 success = employee.set_last_name(last_name)
 
-            elif position >= NUMBER_START \
-                    and position < NUMBER_START + 5:
-                pick = input('Select ' + str(position - 2) + ': ')
+            elif position < NUMBER_START + 4:
+                pick = input('Select ' + str(position - 1) + ': ')
                 success = employee.add_pick(pick)
                 if success:
                     self.winning_numbers[pick] += 1
 
-            elif position == NUMBER_START + 5:
+            else:
                 pick = input('Select Powerball Number: ')
                 success = employee.pick_powerball(pick)
                 if success:
@@ -98,16 +102,18 @@ class Application(object):
 
         for i in range(len(winners), 5):
             winners.append(
-                str(random.randint(BOTTOM_RANGE, TOP_RANGE_REGULAR))
+                random.randint(BOTTOM_RANGE, TOP_RANGE_REGULAR)
             )
 
         powerball_winner = str(random.randint(
             BOTTOM_RANGE, TOP_RANGE_POWERBALL))
-            
+
         if len(self.powerball) > 1:
             top_2 = self.powerball.most_common(2)
             if top_2[0][1] > top_2[1][1]:
                 powerball_winner = top_2[0][1]
+
+        winners = list(map(str, sorted(winners)))
 
         print('Winning Numbers:')
         print(" ".join(winners))
