@@ -14,11 +14,12 @@ class Application(object):
         self.employees = []
         self.winning_numbers = Counter()
         self.powerball = Counter()
+        pass
 
     def run(self):
         position = 0
         NUMBER_START = 3  # after fname lname
-        employee = Ticket()  # first employee
+        employee = Employee()  # first employee
         while(position < NUMBER_START + 6):
 
             if position == 0:  # first name
@@ -73,7 +74,7 @@ class Application(object):
         """
 
         print('-' * 20)
-        print('Tickets:')
+        print('Employees:')
         for employee in self.employees:
             print(employee)
 
@@ -100,20 +101,23 @@ class Application(object):
                 str(random.randint(BOTTOM_RANGE, TOP_RANGE_REGULAR))
             )
 
-        top_2 = self.powerball.most_common(2)
-        if top_2[0][1] > top_2[1][1]:
-            powerball_winner = top_2[0][1]
-        else:
-            powerball_winner = str(random.randint(
-                BOTTOM_RANGE, TOP_RANGE_POWERBALL))
+        powerball_winner = str(random.randint(
+            BOTTOM_RANGE, TOP_RANGE_POWERBALL))
+            
+        if len(self.powerball) > 1:
+            top_2 = self.powerball.most_common(2)
+            if top_2[0][1] > top_2[1][1]:
+                powerball_winner = top_2[0][1]
 
-        print(winners)
+        print('Winning Numbers:')
+        print(" ".join(winners))
+        print('And the Powerball Number...')
         print(powerball_winner)
 
 
-class Ticket(object):
+class Employee(object):
     """
-    Holds Employee first name, last name & lottery ticket info.
+    Holds Employee first name, last name & picks.
     """
 
     def __init__(self):
@@ -166,9 +170,8 @@ class Ticket(object):
             print(e)
 
     def __str__(self):
-        return " ".join([self.__fname, self.__lname] +
-                        list(map(str, self.__picks)) +
-                        ['Powerball:', str(self.__powerball)])
+        return " ".join([self.__fname, self.__lname] + list(map(str, self.__picks)) + ['Powerball:', str(self.__powerball)])
+
 
 if __name__ == '__main__':
     application = Application()
